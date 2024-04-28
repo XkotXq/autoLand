@@ -1,28 +1,17 @@
 import {
     Table,
     TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import {BadgeX, Pencil, Power, EllipsisVertical, AlertCircle} from "lucide-react";
-import {
-    AlertDialog, AlertDialogAction, AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription, AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTrigger
-} from "@/components/ui/alert-dialog";
 import Link from 'next/link'
 import Dashboardtablerow from "@/components/dashboardtablerow";
 const getData = async () => {
+    const apiURL = process.env.API_URL
     try {
-        const res = await fetch("http://localhost:3000/api/offer", {
+        const res = await fetch(`${apiURL}/api/offer`, {
             method: "GET",
             cache: "no-store"
         })
@@ -31,7 +20,7 @@ const getData = async () => {
             console.log("Błąd pobierania danych")
             return []
         }
-        const data = await res.json()
+        const data = await res.json() || []
         console.log(data)
         return data
     } catch (e) {
